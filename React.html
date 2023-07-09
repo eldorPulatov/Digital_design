@@ -1,0 +1,326 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <title>Моя страница</title>
+    <style>
+        body {
+            background-color: #5E2563;
+            margin: 0;
+            padding: 20px;
+            font-family: Arial, sans-serif;
+        }
+        
+        .container {
+            display: flex;
+            justify-content: space-between;
+        }
+        
+        .column {
+            flex-basis: 45%;
+            padding: 10px;
+            background-color: #fff;
+            border-radius: 5px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+        }
+        
+        .column img {
+            max-width: 100%;
+            border-radius: 5px;
+        }
+        
+        .description {
+            margin-top: 10px;
+            line-height: 1.5;
+        }
+        
+        .links {
+            margin-top: 20px;
+        }
+        
+        .form {
+            margin-top: 20px;
+            padding-left: 10px;
+        }
+        
+        .footer {
+            margin-top: 40px;
+            text-align: center;
+            color: #888;
+        }
+        .form label {
+            margin-bottom: 5px;
+        }
+
+        .form input[type="text"],
+        .form select,
+        .form input[type="radio"],
+        .form input[type="submit"] {
+            margin-bottom: 20px;
+        }
+        
+        .form input[type="checkbox"] {
+            margin-top: 30px;
+        }
+        
+        #getRateButton {
+            background-color: #4CAF50;
+            color: white;
+            font-size: 16px;
+            padding: 10px 20px;
+            border: none;
+            cursor: pointer;
+        }
+        #getWeatherButton {
+            background-color: #2196F3;
+            color: white;
+            padding: 10px 20px;
+            font-size: 16px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+        #getBitcoinRateButton {
+            background-color: yellow;
+            color: black;
+            padding: 10px 20px;
+            font-size: 16px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+    <h1>Home</h1>
+    <div class="container">
+        <div class="column">
+            <img src="https://images.wallpaperscraft.ru/image/single/zvezdnoe_skoplenie_ngc_7129_zvezdy_98385_2048x1152.jpg" alt="Изображение">
+            <div class="description">
+                <h2>Описание любимой картины</h2>
+                <p>Звезда́ — массивное самосветящееся небесное тело, состоящее из газа и плазмы, 
+                    в котором происходят, происходили или будут происходить термоядерные реакции.
+                    Ближайшей к Земле звездой является Солнце.
+                </p>
+            </div>
+            <div class="links">
+                <h2>Полезные ссылки</h2>
+                <ul>
+                    <li><a href="https://ru.wikipedia.org/wiki/Звезда">Ссылка на Вики</a></li>
+                    <li><a href="https://medium.com/stars-and-something-small/efb13ad20eb8">Ссылка 2</a></li>
+                </ul>
+            </div>
+        </div>
+        <div class="column">
+            <img src="https://avatars.mds.yandex.net/i?id=69c03ebe89fa322125a79bb99538e7ca9d038662-8294270-images-thumbs&n=13" alt="Изображение">
+            <div class="description">
+                <h2>Описание любимого языка программирования</h2>
+                <p>C# (произносится как "си шарп") - современный объектно-ориентированный и типобезопасный язык программирования. 
+                    C# позволяет разработчикам создавать разные типы безопасных и надежных приложений, выполняющихся в .NET.
+                    C# относится к широко известному семейству языков C, и покажется хорошо знакомым любому, кто работал с C, C++, Java или JavaScript.
+                </p>
+            </div>
+            <div class="links">
+                <h2>Полезные ссылки</h2>
+                <ul>
+                    <li><a href="https://learn.microsoft.com/ru-ru/dotnet/csharp/">Ссылка на документацию Микрософт</a></li>
+                    <li><a href="https://ru.wikipedia.org/wiki/C_Sharp">Ссылка на Вики</a></li>
+                </ul>
+            </div>
+        </div>
+        <!-- Рутовый элемент -->
+        <div class="column" id="root"></div>
+        <div class="column">
+            <h1>Курсы валют</h1>
+            <button id="getRateButton">Получить курс</button>
+            <div id="usdRate"></div>
+            <div id="eurRate"></div>
+            <br>
+            <h1>Погода</h1>
+            <button id="getWeatherButton">Получить погоду</button>
+            <div id="weatherDataC"></div>
+            <div id="weatherDataF"></div>
+            <br>
+            <h1>Курс биткоина</h1>
+            <button id="getBitcoinRateButton">Получить курс биткоина</button>
+            <div id="bitcoinRate"></div>
+        </div>
+    </div>
+    <!-- Подключаем библиотеки REACT -->
+    <script crossorigin src="https://unpkg.com/react@16/umd/react.production.min.js"></script>
+		<script crossorigin src="https://unpkg.com/react-dom@16/umd/react-dom.production.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/babel-standalone/6.25.0/babel.min.js"></script>
+
+    <script type="text/babel">
+      class SurveyForm extends React.Component {
+        constructor(props) {
+          super(props);
+          this.state = {
+            name: "",
+            favoriteLanguage: "",
+            device: "",
+            desktop: false,
+            laptop: false,
+            mobile: false,
+            subscribe: false,
+          };
+        }
+    
+        handleSubmit = (event) => {
+          event.preventDefault();
+          const { name, favoriteLanguage, device, desktop, laptop, mobile, subscribe } = this.state;
+          const selectedDevice = desktop ? "Настольный компьютер" : laptop ? "Ноутбук" : mobile ? "Мобильное устройство" : "";
+          const message = `Имя: ${name}\nЛюбимый язык программирования: ${favoriteLanguage}\nВыбранный тип устройства: ${selectedDevice}\nПодписка на рассылку: ${subscribe ? "Да" : "Нет"}`;
+          alert(message);
+        };
+    
+        handleNameChange = (event) => {
+          this.setState({ name: event.target.value });
+        };
+    
+        handleFavoriteLanguageChange = (event) => {
+          this.setState({ favoriteLanguage: event.target.value });
+        };
+    
+        handleDeviceChange = (event) => {
+          const device = event.target.value;
+          this.setState({ device, desktop: device === "desktop", laptop: device === "laptop", mobile: device === "mobile" });
+        };
+    
+        handleSubscribeChange = (event) => {
+          this.setState({ subscribe: event.target.checked });
+        };
+    
+        render() {
+          const { name, favoriteLanguage, device, subscribe } = this.state;
+    
+          const favoriteLanguages = [
+            { value: "", label: "Выберите язык" },
+            { value: "python", label: "Python" },
+            { value: "java", label: "Java" },
+            { value: "javascript", label: "JavaScript" },
+          ];
+    
+          const deviceTypes = [
+            { value: "desktop", label: "Настольный компьютер" },
+            { value: "laptop", label: "Ноутбук" },
+            { value: "mobile", label: "Мобильное устройство" },
+          ];
+    
+          return (
+            <div>
+              <h2>Опрос</h2>
+              <form className="form" onSubmit={this.handleSubmit}>
+                <label htmlFor="name">Имя:</label>
+                <br />
+                <input type="text" id="name" name="name" value={name} onChange={this.handleNameChange} required />
+                <br />
+                <label htmlFor="favorite_language">Любимый язык программирования:</label>
+                <br />
+                <select id="favorite_language" name="favorite_language" value={favoriteLanguage} onChange={this.handleFavoriteLanguageChange} required>
+                  {favoriteLanguages.map((language) => (
+                    <option key={language.value} value={language.value}>
+                      {language.label}
+                    </option>
+                  ))}
+                </select>
+                <br />
+                <label>Выберите тип устройства:</label>
+                <br />
+                {deviceTypes.map((deviceType) => (
+                  <div key={deviceType.value}>
+                    <input
+                      type="radio"
+                      id={deviceType.value}
+                      name="device"
+                      value={deviceType.value}
+                      checked={device === deviceType.value}
+                      onChange={this.handleDeviceChange}
+                      required
+                    />
+                    <label htmlFor={deviceType.value}>{deviceType.label}</label>
+                    <br />
+                  </div>
+                ))}
+                <input type="checkbox" id="subscribe" name="subscribe" checked={subscribe} onChange={this.handleSubscribeChange} />
+                <label htmlFor="subscribe">Подписаться на рассылку</label>
+                <br />
+                <input type="submit" value="Отправить" />
+              </form>
+            </div>
+          );
+        }
+      }
+    
+      ReactDOM.render(<SurveyForm />, document.getElementById("root"));
+    </script>
+    <!-- JavaScript -->
+    <script>
+        // Для курса валют
+        document.getElementById("getRateButton").addEventListener("click", async function() {
+            fetchCurrencyRates();
+        });
+
+        // Функция для запроса курса валют
+        function fetchCurrencyRates() {
+            fetch("https://www.cbr-xml-daily.ru/daily_json.js")
+                .then(response => response.json())
+                .then(data => {
+                    const usdRate = data.Valute.USD.Value;
+                    const eurRate = data.Valute.EUR.Value;
+
+                    document.getElementById("usdRate").textContent = `Курс USD: ${usdRate}`;
+                    document.getElementById("eurRate").textContent = `Курс EUR: ${eurRate}`;
+                })
+                .catch(error => {
+                    console.error(error);
+                });
+        }
+        // Для погоды
+        document.getElementById("getWeatherButton").addEventListener("click", function() {
+            fetchWeatherData();
+        });
+
+        // Функция для запроса погоды
+        function fetchWeatherData() {
+            const apiKey = "043699f36d0b4e85bee212547233105";
+            fetch(`https://api.weatherapi.com/v1/current.json?key=${apiKey}&q=Saint%20Petersburg`)
+                .then(response => response.json())
+                .then(data => {
+                    const temperatureC = data.current.temp_c;
+                    const temperatureF = data.current.temp_f;
+                    const weatherDescription = data.current.condition.text;
+
+                    document.getElementById("weatherDataC").textContent = `Температура по шкале Цельсия: ${temperatureC} °C, ${weatherDescription}`;
+                    document.getElementById("weatherDataF").textContent = `Температура по шкале Фаренгейта: ${temperatureF} °F, ${weatherDescription}`;
+                })
+                .catch(error => {
+                    console.error(error);
+                });
+        }
+        // Для биткоина
+        document.getElementById("getBitcoinRateButton").addEventListener("click", function() {
+            fetchBitcoinRate();
+        });
+
+        // Функция для получения курса биткоина
+        function fetchBitcoinRate() {  
+            fetch("https://api.coingecko.com/api/v3/simple/price?ids=bitcoin%2Capecoin%2Cethereum%2Clitecoin&vs_currencies=usd")
+                .then(response => response.json())
+                .then(data => {
+                    const bitcoinRate = data.bitcoin.usd;
+                    document.getElementById("bitcoinRate").textContent = `Курс биткоина: $${bitcoinRate}`;
+                })
+                .catch(error => {
+                    console.error(error);
+                });
+        }
+        // Ставим интервал в час для функций
+        setInterval(fetchCurrencyRates, 3600000);
+        setInterval(fetchWeatherData, 3600000);
+        setInterval(fetchBitcoinRate, 3600000);
+    </script>
+    <div class="footer">
+        &copy; QWERTY inc. 2023
+    </div>
+</body>
+</html>
