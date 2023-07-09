@@ -1,0 +1,12 @@
+D:\work\DigDes\Практическая 1\WordCounterLibrary\WordCounterLibrary\bin\Debug\net6.0\WordCounterLibrary.deps.json
+D:\work\DigDes\Практическая 1\WordCounterLibrary\WordCounterLibrary\bin\Debug\net6.0\WordCounterLibrary.dll
+D:\work\DigDes\Практическая 1\WordCounterLibrary\WordCounterLibrary\bin\Debug\net6.0\WordCounterLibrary.pdb
+D:\work\DigDes\Практическая 1\WordCounterLibrary\WordCounterLibrary\obj\Debug\net6.0\WordCounterLibrary.csproj.AssemblyReference.cache
+D:\work\DigDes\Практическая 1\WordCounterLibrary\WordCounterLibrary\obj\Debug\net6.0\WordCounterLibrary.GeneratedMSBuildEditorConfig.editorconfig
+D:\work\DigDes\Практическая 1\WordCounterLibrary\WordCounterLibrary\obj\Debug\net6.0\WordCounterLibrary.AssemblyInfoInputs.cache
+D:\work\DigDes\Практическая 1\WordCounterLibrary\WordCounterLibrary\obj\Debug\net6.0\WordCounterLibrary.AssemblyInfo.cs
+D:\work\DigDes\Практическая 1\WordCounterLibrary\WordCounterLibrary\obj\Debug\net6.0\WordCounterLibrary.csproj.CoreCompileInputs.cache
+D:\work\DigDes\Практическая 1\WordCounterLibrary\WordCounterLibrary\obj\Debug\net6.0\WordCounterLibrary.dll
+D:\work\DigDes\Практическая 1\WordCounterLibrary\WordCounterLibrary\obj\Debug\net6.0\refint\WordCounterLibrary.dll
+D:\work\DigDes\Практическая 1\WordCounterLibrary\WordCounterLibrary\obj\Debug\net6.0\WordCounterLibrary.pdb
+D:\work\DigDes\Практическая 1\WordCounterLibrary\WordCounterLibrary\obj\Debug\net6.0\ref\WordCounterLibrary.dll
